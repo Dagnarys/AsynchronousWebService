@@ -50,7 +50,7 @@ func sendCalcRequest(request Request) {
 	jsonAnswer, _ := json.Marshal(answer)
 	bodyReader := bytes.NewReader(jsonAnswer)
 
-	requestURL := fmt.Sprintf("http://127.0.0.1:8000/api/insurances/%d/update_insurance_amount/", request.InsuranceID)
+	requestURL := fmt.Sprintf("http://127.0.0.1:8000/api/insurances/%d/calc_amount/", request.InsuranceID)
 
 	req, _ := http.NewRequest(http.MethodPost, requestURL, bodyReader)
 

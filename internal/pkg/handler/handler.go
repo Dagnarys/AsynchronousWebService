@@ -15,7 +15,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	router.Use(cors.Default())
 
-	router.POST("/update_insurance_amount/", h.issueCalc)
+	router.POST("/calc_amount/", h.issueCalc)
 
 	return router
 }
