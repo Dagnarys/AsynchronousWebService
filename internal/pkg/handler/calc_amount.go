@@ -13,7 +13,6 @@ import "github.com/gin-gonic/gin"
 type CalcRequest struct {
 	Amount    int   `json:"premium_amount"`
 	AccessKey int64 `json:"access_key"`
-	//Bankrupt  int   `json:"bankrupt"`
 }
 
 type Request struct {
@@ -39,7 +38,7 @@ func (h *Handler) issueCalc(c *gin.Context) {
 
 func sendCalcRequest(request Request) {
 
-	var premium_amount = rand.Intn(10000)
+	var premium_amount = 1000 + rand.Intn(10000)
 
 	answer := CalcRequest{
 		AccessKey: 123,
@@ -47,11 +46,11 @@ func sendCalcRequest(request Request) {
 	}
 
 	client := &http.Client{}
-
+	fmt.Print("amount", premium_amount)
 	jsonAnswer, _ := json.Marshal(answer)
 	bodyReader := bytes.NewReader(jsonAnswer)
 
-	requestURL := fmt.Sprintf("http://127.0.0.1:8000/api/insurances/%d/calc_amount/", request.InsuranceID)
+	requestURL := fmt.Sprintf("http://127.0.0.1:8000/api/insurances/%d/update_insurance_amount/", request.InsuranceID)
 
 	req, _ := http.NewRequest(http.MethodPost, requestURL, bodyReader)
 
@@ -65,5 +64,5 @@ func sendCalcRequest(request Request) {
 
 	defer response.Body.Close()
 
-	fmt.Println("PUT Request Status:", response.Status)
+	fmt.Println("PUT Request Status:3", response.Status)
 }
